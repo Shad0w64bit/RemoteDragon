@@ -1,0 +1,103 @@
+# depslib dependency file v1.0
+1569238997 source:c:\projects\codeblock\remotedragon\include\monitor.cpp
+	"Monitor.h"
+
+1569238458 c:\projects\codeblock\remotedragon\include\monitor.h
+	<windows.h>
+	<map>
+	<atomic>
+	<iostream>
+
+1569649386 source:c:\projects\codeblock\remotedragon\include\netclient.cpp
+	"NetClient.h"
+
+1569649195 c:\projects\codeblock\remotedragon\include\netclient.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<thread>
+	<mutex>
+	<atomic>
+	<queue>
+	<iostream>
+
+1569350387 source:c:\projects\codeblock\remotedragon\client\v1\main.cpp
+	<windows.h>
+	<commctrl.h>
+	<stdio.h>
+	"resource.h"
+	"../../include/RemoteDragon.h"
+	"later.h"
+
+1514140582 c:\projects\codeblock\remotedragon\client\v1\resource.h
+
+1569349867 c:\projects\codeblock\remotedragon\include\remotedragon.h
+	<list>
+	<algorithm>
+	"Monitor.h"
+	"NetClient.h"
+
+1544174933 c:\projects\codeblock\remotedragon\client\v1\later.h
+	<functional>
+	<chrono>
+	<future>
+	<cstdio>
+
+1569267418 source:c:\projects\codeblock\remotedragon\client\v1\resource.rc
+	<windows.h>
+	<commctrl.h>
+	<richedit.h>
+	"resource.h"
+
+1569350057 source:c:\projects\codeblock\remotedragon\include\remotedragon.cpp
+	"RemoteDragon.h"
+
+1569228916 source:c:\projects\remotedragon\include\monitor.cpp
+	"Monitor.h"
+
+1569171633 c:\projects\remotedragon\include\monitor.h
+	<windows.h>
+	<map>
+	<atomic>
+	<iostream>
+
+1569229680 source:c:\projects\remotedragon\include\netclient.cpp
+	"NetClient.h"
+
+1569172592 c:\projects\remotedragon\include\netclient.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<thread>
+	<mutex>
+	<atomic>
+	<queue>
+	<iostream>
+
+1569236688 source:c:\projects\remotedragon\include\remotedragon.cpp
+	"RemoteDragon.h"
+
+1569177957 c:\projects\remotedragon\include\remotedragon.h
+	"Monitor.h"
+	"NetClient.h"
+
+1569237222 source:c:\projects\remotedragon\client\v1\main.cpp
+	<windows.h>
+	<commctrl.h>
+	<stdio.h>
+	"resource.h"
+	"../../include/RemoteDragon.h"
+	"later.h"
+
+1514140582 c:\projects\remotedragon\client\v1\resource.h
+
+1544174933 c:\projects\remotedragon\client\v1\later.h
+	<functional>
+	<chrono>
+	<future>
+	<cstdio>
+
+1514140582 source:c:\projects\remotedragon\client\v1\resource.rc
+	<windows.h>
+	<commctrl.h>
+	<richedit.h>
+	"resource.h"
+
