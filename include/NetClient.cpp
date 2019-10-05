@@ -161,8 +161,8 @@ void NetClient::Handler()
                 int get =  recv(_sock, p->buffer + p->sent, p->length - p->sent, 0);
                 p->sent += get;
             }
-            int sent = p->sent;
-            int length = p->length;
+//            int sent = p->sent;
+//            int length = p->length;
 
             if (p->sent == p->length)
             {

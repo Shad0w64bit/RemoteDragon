@@ -3,6 +3,7 @@
 
 #include "Monitor.h"
 #include "NetClient.h"
+#include "SmartPacket.h"
 
 typedef void (*FuncReciveMsg)(const char* str);
 typedef void (*FuncReciveScreen)(const char* bufer, int len);
