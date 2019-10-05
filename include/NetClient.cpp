@@ -53,20 +53,6 @@ void NetClient::Connect(const char* host, unsigned short int port)
     u_long iMode = 1; // NON-BLOCKING
     ioctlsocket( _sock, FIONBIO, &iMode );
 
-/*    if ( SOCKET_ERROR == ( bind(_sock, (sockaddr*) &addr, sizeof(addr)) ) )
-    {
-        char* buf = reinterpret_cast<char*>(malloc(30));
-        sprintf(buf, "Socket error: %d", WSAGetLastError());
-        throw buf;
-    }
-
-    if ( FAILED(listen( _sock, SOMAXCONN)) )
-    {
-        char* buf = reinterpret_cast<char*>(malloc(30));
-        sprintf(buf, "Socket error: %d", WSAGetLastError());
-        throw buf;
-    }
-*/
     // Run Handler
     _terminate = false;
     _handler = new std::thread(&NetClient::Handler, this);
@@ -94,7 +80,6 @@ void NetClient::Disconnect()
     while (!_out.empty())
     {
         pkg* p= _out.front();
-        //printf(p->buffer);
         free( p->buffer );
         delete p;
         _out.pop();
@@ -161,8 +146,6 @@ void NetClient::Handler()
                 int get =  recv(_sock, p->buffer + p->sent, p->length - p->sent, 0);
                 p->sent += get;
             }
-//            int sent = p->sent;
-//            int length = p->length;
 
             if (p->sent == p->length)
             {
@@ -176,7 +159,6 @@ void NetClient::Handler()
 
                 // Send to user
                 RecivePacket(_lastInPacket);
-                //Recive(_lastInPacket->buffer, _lastInPacket->length);
                 free(_lastInPacket->buffer);
                 delete _lastInPacket;
                 _lastInPacket = nullptr;
@@ -200,12 +182,6 @@ void NetClient::Handler()
                 _out.pop();
             }
             continue;
-
-//            auto len = _lastPacket.length;
-
-//            send(_sock, reinterpret_cast<const char*>(&len), sizeof(len), 0);
-            //send(new_sock, reinterpret_cast<const char*>(&len), sizeof(len), 0);
-
         }
 
 
@@ -235,11 +211,6 @@ void NetClient::RecivePacket(pkg* packet)
     8382	System Request
 
     */
-//    std::cout << packet->buffer << "\t" << packet->length << std::endl;
-
-//    free(packet->buffer);
-//    delete packet;
-    // free(packet->buffer); // We need do it
 }
 
 void NetClient::RemoveType(WORD type)

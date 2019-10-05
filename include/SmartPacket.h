@@ -99,8 +99,4 @@ private:
     int length = 0;
     int pos;
     PacketType type;
-//    HeaderPacket* header = nullptr;
-
-
-
 };
