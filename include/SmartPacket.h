@@ -12,12 +12,8 @@ enum PacketType {ptSend, ptRecive};
 class SmartPacket
 {
 public:
-    SmartPacket() //int bufLen = 0
+    SmartPacket()
     {
-/*        length = bufLen;
-        if (length > 0) {
-            buffer = reinterpret_cast<char*>( malloc(length) );
-        }*/
 
     }
 
@@ -48,11 +44,10 @@ public:
         try
         {
             type = ptSend;
-            length = szBuf;
+            length = sizeof(HeaderPacket) + szBuf;
             if (buffer != nullptr) free(buffer);
-            int szHeader = sizeof(HeaderPacket);
-            buffer = reinterpret_cast<char*> (malloc(szHeader + length));
-            pos = szHeader;
+            buffer = reinterpret_cast<char*> (malloc(length));
+            pos = sizeof(HeaderPacket);
         } catch (...) {
             return false;
         }
@@ -95,61 +90,8 @@ public:
     }
 
 
-/*
-    int GetPosition()
-    {
-        return pos;
-    }
-
-    int GetLength()
-    {
-        return length - pos;
-    }
-
-    void SetPosition(int p)
-    {
-        pos = p;
-    }
-
-    void AddPosition(int p)
-    {
-        pos += p;
-    }
-
-    */
-/*
-    HeaderPacket* GetHeaderPacker()
-    {
-        return reinterpret_cast<HeaderPacket*>(buffer);
-    }
-*/
-
-
-
-/*    void Resize( int len )
-    {
-        // SLOWLY
-        int oldLen = length;
-        int newLen = ( len > oldLen ) ? oldLen : len ;
-        char* b = buffer;
-        char* n = reinterpret_cast<char*> (malloc(len));
-
-        if (b == nullptr)
-        {
-            buffer = n;
-            return;
-        }
-
-        memcpy( n, b, newLen );
-
-        free(buffer);
-        buffer = n;
-    }*/
-
-
-
-    void SetLength() { // int newLength = 0
-        // length = newLength;
+    void SetPacketLength(int newLength) {
+        length = newLength;
     }
 
 private:

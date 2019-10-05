@@ -45,16 +45,6 @@ int main()
 
     thirdCheck(testPacket, TEST_PACKET_SIZE);
 
-    /*
-    cout << "Create Test SmartPacket" << endl;
-
-    SmartPacket sp;
-
-    cout << "Allocate Receive SmartPacket" << endl;
-
-    sp.AllocateRecive(TEST_PACKET_SIZE);
-**/
-
     free(testPacket);
     return 0;
 }
@@ -113,14 +103,11 @@ bool secondCheck(char* orig, int len)
 
     int step = len / 4;
 
-//    memcpy(sp.GetHeader(), &head, sizeof(HeaderPacket));
-
     for (int i=0; i< len; i+=step)
     {
         char* tmp = orig + i;
         memcpy( sp.Position(), tmp, step); // sp.GetLength()
         sp.PositionMove(step);
-//        sp.AddPosition(step);
     }
 
     if (checkPacket(orig, sp.GetData(), TEST_PACKET_SIZE))
@@ -136,6 +123,14 @@ bool secondCheck(char* orig, int len)
         cout << "Test21: OK"  << endl;
     } else {
         cout << "Test21: Fail"  << endl;
+    }
+
+    int sz = sp.GetPacketLength();
+    if (sz == (sizeof(HeaderPacket) + TEST_PACKET_SIZE))
+    {
+        cout << "Test22: OK"  << endl;
+    } else {
+        cout << "Test22: Fail"  << endl;
     }
 
     return true;
@@ -156,7 +151,7 @@ bool thirdCheck(char* orig, int len)
     for (int i=0; i< len; i+=step)
     {
         char* tmp = orig + i;
-        memcpy( sp.Position(), tmp, step); // sp.GetLength()
+        memcpy( sp.Position(), tmp, step);
         sp.PositionMove(step);
     }
 
@@ -177,5 +172,14 @@ bool thirdCheck(char* orig, int len)
         cout << "Test31: Fail"  << endl;
     }
 
+    int sz = sp.GetPacketLength();
+    if (sz == (sizeof(HeaderPacket) + TEST_PACKET_SIZE))
+    {
+        cout << "Test32: OK"  << endl;
+    } else {
+        cout << "Test32: Fail"  << endl;
+    }
+
     return true;
 }
+
