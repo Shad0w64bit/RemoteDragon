@@ -101,3 +101,37 @@
 	<richedit.h>
 	"resource.h"
 
+1570343779 source:c:\projects\remotedragon2\include\monitor.cpp
+	"Monitor.h"
+
+1570343779 c:\projects\remotedragon2\include\monitor.h
+	<windows.h>
+	<map>
+	<atomic>
+	<iostream>
+
+1570344874 source:c:\projects\remotedragon2\include\netclient.cpp
+	"NetClient.h"
+
+1570343779 c:\projects\remotedragon2\include\netclient.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<thread>
+	<mutex>
+	<atomic>
+	<queue>
+	<iostream>
+
+1570343779 source:c:\projects\remotedragon2\include\remotedragon.cpp
+	"RemoteDragon.h"
+
+1570343779 c:\projects\remotedragon2\include\remotedragon.h
+	<list>
+	<algorithm>
+	"Monitor.h"
+	"NetClient.h"
+	"SmartPacket.h"
+
+1570343779 c:\projects\remotedragon2\include\smartpacket.h
+	<windows.h>
+

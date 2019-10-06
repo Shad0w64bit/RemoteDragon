@@ -44,6 +44,8 @@
 		<Unit filename="../../include/Monitor.h" />
 		<Unit filename="../../include/NetClient.cpp" />
 		<Unit filename="../../include/NetClient.h" />
+		<Unit filename="../../include/NetClient2.cpp" />
+		<Unit filename="../../include/NetClient2.h" />
 		<Unit filename="../../include/RemoteDragon.cpp" />
 		<Unit filename="../../include/RemoteDragon.h" />
 		<Unit filename="../../include/SmartPacket.h" />

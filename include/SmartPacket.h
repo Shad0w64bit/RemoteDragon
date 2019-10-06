@@ -89,6 +89,16 @@ public:
         pos += i;
     }
 
+    void SetPosition(int i)
+    {
+        pos = i;
+    }
+
+    bool Complete()
+    {
+        return (pos == length);
+    }
+
 
     void SetPacketLength(int newLength) {
         length = newLength;

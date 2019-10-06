@@ -11,9 +11,7 @@ NetClient::NetClient(bool WSAInit)
         WSADATA ws;
         if ( FAILED( WSAStartup( MAKEWORD( 2, 2 ), &ws ) ) )
         {
-            char* buf = reinterpret_cast<char*>(malloc(30));
-            sprintf(buf, "WSAStartup error: %d", WSAGetLastError());
-            throw buf;
+            throw std::runtime_error( "WSAStartup error: " + std::to_string( WSAGetLastError() ) );
         }
     }
 
