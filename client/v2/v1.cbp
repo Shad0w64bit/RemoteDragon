@@ -48,6 +48,8 @@
 		<Unit filename="../../include/NetClient2.h" />
 		<Unit filename="../../include/RemoteDragon.cpp" />
 		<Unit filename="../../include/RemoteDragon.h" />
+		<Unit filename="../../include/RemoteDragon2.cpp" />
+		<Unit filename="../../include/RemoteDragon2.h" />
 		<Unit filename="../../include/SmartPacket.h" />
 		<Unit filename="later.h" />
 		<Unit filename="main.cpp" />

@@ -1,13 +1,14 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <stdio.h>
+#include <iostream>
 #include "resource.h"
 
-#include "../../include/RemoteDragon.h"
+#include "../../include/RemoteDragon2.h"
 #include "later.h"
 
 HINSTANCE hInst;
-RemoteDragon rd;
+RemoteDragon2 rd;
 HBITMAP bmp;
 bool event_exit = false;
 HWND h;
@@ -40,7 +41,7 @@ void updateImage(HWND hwnd)
         }
 */
 //        rd.Refresh();
-        rd.SendScreen();
+//        rd.SendScreen();
         h = hwnd;
 /*        bmp = mm.CaptureScreen(2);
         RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
@@ -99,16 +100,17 @@ BOOL CALLBACK DlgMain(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         rd.Connect("127.0.0.1", 22222);
         rd.SetReciveMsgFunc(ReciveMsg);
-        rd.SetReciveScreenFunc(ReciveScreen);
-/*        char buf [20];
+//        rd.SetReciveScreenFunc(ReciveScreen);
+        char buf [20];
         for (int i=0; i<100; i++)
         {
             sprintf(buf, "Hello World %d!", i);
             rd.SendMsg(buf);
         }
-*/
+
         //rd.SendScreen();
 
+//
         later later_update(1, true, &updateImage, hwndDlg);
     }
     return TRUE;

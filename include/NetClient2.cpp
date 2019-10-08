@@ -131,7 +131,7 @@ void NetClient2::ReadThread()
                 _in->SetPosition(0);
             }
 
-            auto bytes_recv = recv(_sock, _in->GetData(), _in->GetLength(), 0);
+            auto bytes_recv = recv(_sock, _in->GetRawData(), _in->GetLength(), 0);
             _in->PositionMove(bytes_recv);
 
             if (_in->Complete())
@@ -175,7 +175,7 @@ void NetClient2::WriteThread()
         {
             SmartPacket* p = _out.front();
 
-            auto bytes_send = send(_sock, p->GetData(), p->GetLength(), 0);
+            auto bytes_send = send(_sock, p->GetRawData(), p->GetLength(), 0);
             p->PositionMove(bytes_send);
 
             if (p->Complete())

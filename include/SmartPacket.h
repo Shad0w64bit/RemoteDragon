@@ -69,7 +69,7 @@ public:
         return (sizeof(HeaderPacket) + buffer);
     }
 
-    char* Position()
+    char* GetRawData()
     {
         return (buffer + pos);
     }
