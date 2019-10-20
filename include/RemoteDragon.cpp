@@ -3,6 +3,7 @@
 RemoteDragon::RemoteDragon()
 {
 
+
 }
 
 RemoteDragon::~RemoteDragon()

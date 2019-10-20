@@ -116,19 +116,20 @@ void NetClient2::ReadThread()
 
                 u_long bytes = 0;
                 ioctlsocket( _sock, FIONREAD, &bytes );
-                if (bytes < 4) {
+                if (bytes < sizeof(HeaderPacket)) {
                     continue;
                 }
 
-                int len = 0;
-                if (SOCKET_ERROR == recv(_sock, reinterpret_cast<char*>(&len), sizeof(len), 0))
+                HeaderPacket head;
+                if (SOCKET_ERROR == recv(_sock, reinterpret_cast<char*>(&head), sizeof(HeaderPacket), 0))
                 {
                     continue;
                 }
 
                 _in = new SmartPacket;
-                _in->AllocateRecive(len);
-                _in->SetPosition(0);
+                _in->AllocateRecive(head.len);
+                memcpy(_in->GetHeader(), &head, sizeof(HeaderPacket));
+                _in->SetPosition(sizeof(HeaderPacket));
             }
 
             auto bytes_recv = recv(_sock, _in->GetRawData(), _in->GetLength(), 0);
@@ -136,6 +137,7 @@ void NetClient2::ReadThread()
 
             if (_in->Complete())
             {
+                auto d = _in->GetData();
                 RecivePacket(_in);
                 delete _in;
                 _in = nullptr;
@@ -175,6 +177,7 @@ void NetClient2::WriteThread()
         {
             SmartPacket* p = _out.front();
 
+            auto d = p->GetRawData();
             auto bytes_send = send(_sock, p->GetRawData(), p->GetLength(), 0);
             p->PositionMove(bytes_send);
 

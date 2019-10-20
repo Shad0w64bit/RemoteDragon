@@ -88,9 +88,11 @@ void Monitor::Refresh()
     lastScreen = curScreen;
     HDC dc = CreateDC(L"DISPLAY", NULL, NULL, NULL);
     LPRECT r = &_monitors.at(activeMonitor).MonitorInfo.rcMonitor;
+    int height = r->bottom - r->top;
+    int width = r->right - r->left;
     curScreen = CreateCompatibleBitmap(dc,
-                                        r->right - r->left,
-                                        r->bottom - r->top);
+                                        width,
+                                        height);
     CaptureDeviceContext( dc, r, curScreen);
     ReleaseDC(0,dc);
 }
@@ -114,7 +116,7 @@ MonitorItem* Monitor::GetFullImage()
 
     BYTE* lpPixels = new BYTE[MyBMInfo.bmiHeader.biSizeImage];
     MyBMInfo.bmiHeader.biSize = sizeof(MyBMInfo.bmiHeader);
-    MyBMInfo.bmiHeader.biBitCount = 32;
+    MyBMInfo.bmiHeader.biBitCount = 24; // 24 fix
     MyBMInfo.bmiHeader.biCompression = BI_RGB;
     MyBMInfo.bmiHeader.biHeight = abs(MyBMInfo.bmiHeader.biHeight);
 
@@ -123,7 +125,7 @@ MonitorItem* Monitor::GetFullImage()
         throw "Error getting bitmap information";
     }
 
-    int szBuffer = 4*width*height;
+    int szBuffer = MyBMInfo.bmiHeader.biHeight * MyBMInfo.bmiHeader.biWidth * MyBMInfo.bmiHeader.biBitCount / 8;
     BYTE* buffer = reinterpret_cast<BYTE*>(malloc(szBuffer));
     memcpy(buffer, lpPixels, szBuffer);
 
@@ -173,4 +175,16 @@ void Monitor::CalcBlock()
     blockHeightCount = height / 100;
     if (height % 100 > 0)
         blockHeightCount++;
+}
+
+int Monitor::GetWidth()
+{
+    LPRECT r = &_monitors.at(activeMonitor).MonitorInfo.rcMonitor;
+    return (r->right - r->left);
+}
+
+int Monitor::GetHeight()
+{
+    LPRECT r = &_monitors.at(activeMonitor).MonitorInfo.rcMonitor;
+    return (r->bottom - r->top);
 }

@@ -1,11 +1,12 @@
 #include <windows.h>
 
+#pragma pack(push, 1)
 struct HeaderPacket
 {
-    unsigned int from;
-    unsigned int to;
+    long int len;
     WORD type;
 };
+#pragma pack(pop)
 
 enum PacketType {ptSend, ptRecive};
 
@@ -47,6 +48,8 @@ public:
             length = sizeof(HeaderPacket) + szBuf;
             if (buffer != nullptr) free(buffer);
             buffer = reinterpret_cast<char*> (malloc(length));
+            HeaderPacket* head = GetHeader();
+            head->len = length;
             pos = sizeof(HeaderPacket);
         } catch (...) {
             return false;
@@ -82,6 +85,11 @@ public:
     int GetPacketLength()
     {
         return length;
+    }
+
+    int GetDataLength()
+    {
+        return length - sizeof(HeaderPacket);
     }
 
     void PositionMove(int i)

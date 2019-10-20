@@ -38,6 +38,9 @@ public:
     void SetMonitor(int monitor);
     MonitorItem* GetFullImage();
 
+    int GetWidth();
+    int GetHeight();
+
 protected:
 
 private:

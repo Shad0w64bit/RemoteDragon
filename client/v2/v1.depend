@@ -135,3 +135,79 @@
 1570343779 c:\projects\remotedragon2\include\smartpacket.h
 	<windows.h>
 
+1571380764 source:c:\projects\codeblock\remotedragon2\include\monitor.cpp
+	"Monitor.h"
+
+1569238458 c:\projects\codeblock\remotedragon2\include\monitor.h
+	<windows.h>
+	<map>
+	<atomic>
+	<iostream>
+
+1570464517 source:c:\projects\codeblock\remotedragon2\include\netclient.cpp
+	"NetClient.h"
+
+1569649195 c:\projects\codeblock\remotedragon2\include\netclient.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<thread>
+	<mutex>
+	<atomic>
+	<queue>
+	<iostream>
+
+1571247804 source:c:\projects\codeblock\remotedragon2\include\netclient2.cpp
+	"NetClient2.h"
+
+1570558508 c:\projects\codeblock\remotedragon2\include\netclient2.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<thread>
+	<queue>
+	"SmartPacket.h"
+
+1570774021 c:\projects\codeblock\remotedragon2\include\smartpacket.h
+	<windows.h>
+
+1570772996 source:c:\projects\codeblock\remotedragon2\include\remotedragon.cpp
+	"RemoteDragon.h"
+
+1570168839 c:\projects\codeblock\remotedragon2\include\remotedragon.h
+	<list>
+	<algorithm>
+	"Monitor.h"
+	"NetClient.h"
+	"SmartPacket.h"
+
+1571380808 source:c:\projects\codeblock\remotedragon2\include\remotedragon2.cpp
+	"RemoteDragon2.h"
+
+1570773148 c:\projects\codeblock\remotedragon2\include\remotedragon2.h
+	"NetClient2.h"
+	"Monitor.h"
+	<atomic>
+
+1571377808 source:c:\projects\codeblock\remotedragon2\client\v2\main.cpp
+	<windows.h>
+	<commctrl.h>
+	<stdio.h>
+	<atomic>
+	<iostream>
+	"resource.h"
+	"../../include/RemoteDragon2.h"
+	"later.h"
+
+1514140582 c:\projects\codeblock\remotedragon2\client\v2\resource.h
+
+1544174933 c:\projects\codeblock\remotedragon2\client\v2\later.h
+	<functional>
+	<chrono>
+	<future>
+	<cstdio>
+
+1571377986 source:c:\projects\codeblock\remotedragon2\client\v2\resource.rc
+	<windows.h>
+	<commctrl.h>
+	<richedit.h>
+	"resource.h"
+
