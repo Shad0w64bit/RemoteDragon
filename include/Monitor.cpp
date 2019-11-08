@@ -82,7 +82,7 @@ void Monitor::CaptureDeviceContext(HDC srcDC, LPRECT rect, HBITMAP destBitmap)
     DeleteDC(hdcMem);
 }
 
-void Monitor::Refresh()
+void Monitor::RefreshImage()
 {
     DeleteObject(lastScreen);
     lastScreen = curScreen;
@@ -96,6 +96,7 @@ void Monitor::Refresh()
     CaptureDeviceContext( dc, r, curScreen);
     ReleaseDC(0,dc);
 }
+
 
 MonitorItem* Monitor::GetFullImage()
 {

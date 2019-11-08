@@ -33,7 +33,7 @@ public:
     bool DeviceRefresh();
     int Count();
 
-    void Refresh();
+    void RefreshImage();
 
     void SetMonitor(int monitor);
     MonitorItem* GetFullImage();

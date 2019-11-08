@@ -69,7 +69,7 @@ void RemoteDragon::SendScreen()
     }*/
 //    BYTE* buf;
 //    int len;
-    mon.Refresh();
+    mon.RefreshImage();
     MonitorItem* mi = mon.GetFullImage();
 //    mon.GetFullImage(*buf, &len);
 //    std::cout << mon.Count() << std::endl;

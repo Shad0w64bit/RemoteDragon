@@ -6,7 +6,7 @@ RemoteDragon2::RemoteDragon2()
     _widthScreen = 0;
     screenSending = true;
 //    int cnt = mon.Count();
-    mon.SetMonitor(2);
+//    mon.SetMonitor(2);
 }
 
 RemoteDragon2::~RemoteDragon2()
@@ -54,7 +54,9 @@ void RemoteDragon2::RecivePacket(SmartPacket* packet)
 
 void RemoteDragon2::SendedPacket(SmartPacket* packet)
 {
-    if (packet->GetHeader()->type == 0x6873) {
+    if ((packet->GetHeader()->type == 0x6873) ||
+        (packet->GetHeader()->type == 0x6874))
+    {
         screenSending = false;
     }
 }
@@ -66,25 +68,31 @@ void RemoteDragon2::SendScreen()
     }
 
     screenSending = true;
-
+/*
     mon.Refresh();
     MonitorItem* mi = mon.GetFullImage();
 
     SmartPacket* sp = new SmartPacket();
     sp->AllocateSend(mi->len);
-    char* buf = mi->buffer;
+//    char* buf = mi->buffer;
     memcpy(sp->GetData(), mi->buffer, mi->len);
     sp->GetHeader()->type = 0x6873;
     NetClient2::Send(sp);
 //    SendPacket(0x6873, reinterpret_cast<char*>(mi->buffer), mi->len);
     free(mi->buffer);
     delete mi;
+*/
+
+    SmartPacket* sp = screen.GetFull();
+    NetClient2::Send(sp);
 
 }
 
 void RemoteDragon2::SendResolution()
 {
-    screenSending = true;
+    SmartPacket* sp = screen.GetResolution();
+    NetClient2::Send(sp);
+/*    screenSending = true;
     mon.DeviceRefresh();
 
     int h = mon.GetHeight();
@@ -96,8 +104,8 @@ void RemoteDragon2::SendResolution()
     memcpy(buffer, &h, sizeof(h));
     memcpy(buffer+sizeof(h), &w, sizeof(w));
     sp->GetHeader()->type = 0x6874;
-    NetClient2::Send(sp);
-    screenSending = false;
+    NetClient2::Send(sp);*/
+
 }
 
 int RemoteDragon2::GetHeight()

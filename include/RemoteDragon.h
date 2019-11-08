@@ -19,7 +19,7 @@ public:
     void SetReciveMsgFunc(FuncReciveMsg func);
     void SetReciveScreenFunc(FuncReciveScreen func);
     //void ReciveMsg(const char* str);
-    void Refresh() { mon.Refresh(); }
+    void Refresh() { mon.RefreshImage(); }
 
     bool QueueType(WORD type);
 

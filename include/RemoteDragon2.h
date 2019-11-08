@@ -1,6 +1,6 @@
-#include "NetClient2.h"
-#include "Monitor.h"
 #include <atomic>
+#include "NetClient2.h"
+#include "Screen.h"
 
 typedef void (*FuncReciveMsg)(const char* str);
 typedef void (*FuncReciveScreen)(const char* bufer, int len);
@@ -27,7 +27,8 @@ protected:
     void SendedPacket(SmartPacket* packet);
 
 private:
-    Monitor mon;
+    Screen screen;
+    //Monitor mon;
     int _heightScreen;
     int _widthScreen;
     std::atomic<bool> screenSending;
