@@ -100,9 +100,9 @@ void Monitor::RefreshImage()
 
 MonitorItem* Monitor::GetFullImage()
 {
-    LPRECT r = &_monitors.at(activeMonitor).MonitorInfo.rcMonitor;
+/*    LPRECT r = &_monitors.at(activeMonitor).MonitorInfo.rcMonitor;
     int width = r->right - r->left;
-    int height = r->bottom - r->top;
+    int height = r->bottom - r->top;*/
 
     HDC hdc = GetDC(NULL);
     HDC hdcMem = CreateCompatibleDC(hdc);

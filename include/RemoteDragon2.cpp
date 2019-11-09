@@ -5,6 +5,7 @@ RemoteDragon2::RemoteDragon2()
     _heightScreen = 0;
     _widthScreen = 0;
     screenSending = true;
+    screen.SelectMonitor(2);
 //    int cnt = mon.Count();
 //    mon.SetMonitor(2);
 }
@@ -55,7 +56,8 @@ void RemoteDragon2::RecivePacket(SmartPacket* packet)
 void RemoteDragon2::SendedPacket(SmartPacket* packet)
 {
     if ((packet->GetHeader()->type == 0x6873) ||
-        (packet->GetHeader()->type == 0x6874))
+        (packet->GetHeader()->type == 0x6874) ||
+        (packet->GetHeader()->type == 0x6879))
     {
         screenSending = false;
     }
@@ -83,6 +85,7 @@ void RemoteDragon2::SendScreen()
     delete mi;
 */
 
+//    SmartPacket* sp = screen.GetChanged();
     SmartPacket* sp = screen.GetFull();
     NetClient2::Send(sp);
 

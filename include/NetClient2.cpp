@@ -197,6 +197,8 @@ void NetClient2::WriteThread()
 
 void NetClient2::Send( SmartPacket* packet )
 {
+    if (packet == nullptr)
+        return;
     packet->SetPosition(0);
     _out.push(packet);
 }

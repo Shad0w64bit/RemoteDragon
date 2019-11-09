@@ -1,6 +1,8 @@
 #include "Monitor.h"
 #include "SmartPacket.h"
 
+#define PIXEL_BLOCK 1000
+
 class Screen
 {
 public:
@@ -18,9 +20,13 @@ public:
 
 protected:
 
+    bool BlockEqual(int n);
+    bool eq(int cH, int cW, int imgWidth, int startX);
+
 private:
     Monitor* device;
     MonitorItem* curScreen;
+    MonitorItem* lastScreen;
     //MonitorItem* lastScreen;
 
 
