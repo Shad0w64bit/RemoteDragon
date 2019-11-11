@@ -88,7 +88,7 @@ void RemoteDragon2::SendScreen()
 //    SmartPacket* sp = screen.GetChanged();
     SmartPacket* sp = screen.GetFull();
     NetClient2::Send(sp);
-
+    Sleep(100);
 }
 
 void RemoteDragon2::SendResolution()

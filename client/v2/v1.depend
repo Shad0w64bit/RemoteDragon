@@ -187,7 +187,7 @@
 	"NetClient2.h"
 	"Screen.h"
 
-1573308786 source:c:\projects\codeblock\remotedragon2\client\v2\main.cpp
+1573312539 source:c:\projects\codeblock\remotedragon2\client\v2\main.cpp
 	<windows.h>
 	<commctrl.h>
 	<stdio.h>
@@ -214,10 +214,10 @@
 1573235334 c:\projects\codeblock\remotedragon2\include\_smartpacket.h
 	<windows.h>
 
-1573311675 c:\projects\codeblock\remotedragon2\include\screen.h
+1573499380 c:\projects\codeblock\remotedragon2\include\screen.h
 	"Monitor.h"
 	"SmartPacket.h"
 
-1573309707 source:c:\projects\codeblock\remotedragon2\include\screen.cpp
+1573498765 source:c:\projects\codeblock\remotedragon2\include\screen.cpp
 	"Screen.h"
 

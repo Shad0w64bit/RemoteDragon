@@ -47,13 +47,24 @@ bool Screen::BlockEqual(int n)
 
 bool Screen::eq(int cH, int cW, int imgWidth, int startX)
 {
-    for (int y=0; y<cH; y++)
+
+    for (int y=0; y<cH; y=y+4) // y++
     {
         int offset = (y * imgWidth*3 + startX*3);
         if (memcmp(curScreen->buffer + offset, lastScreen->buffer + offset, cW*3) != 0)
             return false;
     }
     return true;
+}
+
+bool Screen::fill(int cH, int cW, int imgWidth, int startX, int color)
+{
+
+    for (int y=0; y<cH; y++)
+    {
+        int offset = (y * imgWidth*3 + startX*3);
+        memset(curScreen->buffer + offset, color, cW*3);
+    }
 }
 
 void Screen::Analyze()
@@ -70,11 +81,12 @@ void Screen::Analyze()
 
 
 
+    int color = 0;
     for (int n=1; n<=bH*bW; n++)
     {
         //        If Last Element
-        int cH = (n > ((bH-1) * bW)) ? (imgHeight % PIXEL_BLOCK) : PIXEL_BLOCK;
-        int cW = (n % bW == 0) ? (imgWidth  % PIXEL_BLOCK) : PIXEL_BLOCK;
+        int cH = (n > ((bH-1) * bW) && imgHeight % PIXEL_BLOCK != 0) ? (imgHeight % PIXEL_BLOCK) : PIXEL_BLOCK;
+        int cW = (n % bW == 0 && (imgWidth  % PIXEL_BLOCK != 0)) ? (imgWidth  % PIXEL_BLOCK) : PIXEL_BLOCK;
 
         int startX;
         if (n <= bW) {
@@ -88,8 +100,12 @@ void Screen::Analyze()
             int offset = y * imgWidth + startX;
             memcmp(curScreen->buffer + offset, lastScreen->buffer + offset, cW);
         }*/
+        bool e = eq(cH, cW, imgWidth, startX);
+        //fill(cH, cW, imgWidth, startX, color);
+        color += 20;
 
-        std::cout << n  << "\t" << eq(cH, cW, imgWidth, startX) << std::endl;
+
+        //std::cout << n  << "\t" << e << std::endl;
     }
 
 }

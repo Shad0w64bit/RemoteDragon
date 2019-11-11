@@ -1,7 +1,7 @@
 #include "Monitor.h"
 #include "SmartPacket.h"
 
-#define PIXEL_BLOCK 1000
+#define PIXEL_BLOCK 120
 
 class Screen
 {
@@ -22,6 +22,7 @@ protected:
 
     bool BlockEqual(int n);
     bool eq(int cH, int cW, int imgWidth, int startX);
+    bool fill(int cH, int cW, int imgWidth, int startX, int color);
 
 private:
     Monitor* device;
