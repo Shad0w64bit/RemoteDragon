@@ -65,10 +65,12 @@ bool Screen::fill(int cH, int cW, int imgWidth, int startX, int color)
         int offset = (y * imgWidth*3 + startX*3);
         memset(curScreen->buffer + offset, color, cW*3);
     }
+    return true;
 }
 
-void Screen::Analyze()
+void Screen::Analyze(std::vector<ScreenBlock>*& res)
 {
+    res = nullptr;
     if (lastScreen == nullptr)
         return;
 
@@ -81,7 +83,8 @@ void Screen::Analyze()
 
 
 
-    int color = 0;
+    std::vector<ScreenBlock>* r = new std::vector<ScreenBlock>();
+//    int color = 0;
     for (int n=1; n<=bH*bW; n++)
     {
         //        If Last Element
@@ -101,13 +104,22 @@ void Screen::Analyze()
             memcmp(curScreen->buffer + offset, lastScreen->buffer + offset, cW);
         }*/
         bool e = eq(cH, cW, imgWidth, startX);
+        if (!e) {
+            r->insert(r->end(), {cH, cW, n, startX});
+        }
         //fill(cH, cW, imgWidth, startX, color);
-        color += 20;
+        //color += 20;
 
 
         //std::cout << n  << "\t" << e << std::endl;
     }
 
+    if (r->empty())
+    {
+        delete r;
+        r = nullptr;
+    }
+    res = r;
 }
 
 void Screen::SelectMonitor(int i)
@@ -118,7 +130,7 @@ void Screen::SelectMonitor(int i)
 SmartPacket* Screen::GetFull()
 {
     Capture();
-    Analyze();
+//    Analyze();
 
     SmartPacket* sp = new SmartPacket();
     sp->AllocateSend(curScreen->len);
@@ -149,16 +161,67 @@ SmartPacket* Screen::GetResolution()
     return sp;
 }
 
+SmartPacket* Screen::CompressChanges(std::vector<ScreenBlock>* blocks)
+{
+    int lenPacket = 0;
+    for (auto it = blocks->begin(); it != blocks->end(); it++)
+    {
+        lenPacket += sizeof(WORD) + sizeof(int) + (*it).bH * (*it).bW * 3;
+    }
+
+//    int len = cntBlock * (PIXEL_BLOCK * PIXEL_BLOCK + sizeof(WORD) + sizeof(int));
+    SmartPacket* sp = new SmartPacket();
+    sp->AllocateSend(lenPacket);
+    char* buffer = sp->GetData();
+
+    int imgWidth = device->GetWidth();
+    int offset = 0;
+
+    for (auto it = blocks->begin(); it != blocks->end(); it++)
+    {
+        int len = (*it).bH * (*it).bW;
+        WORD n = (*it).n;
+        memcpy(buffer+offset, &n, sizeof(WORD));
+        memcpy(buffer+offset+sizeof(WORD), &len, sizeof(int));
+        offset += sizeof(WORD) + sizeof(int);
+
+        for (int h=0; h<(*it).bH; h++)
+        {
+            int imgOffset = (*it).startX + h*imgWidth*3;
+            memcpy(buffer+offset, curScreen->buffer + imgOffset, (*it).bW * 3);
+            offset += (*it).bW*3;
+        }
+    }
+
+    sp->GetHeader()->type = 0x6879;
+    return sp;
+/*    for (int offset = 0; offset < lenPacket; offset += PIXEL_BLOCK * PIXEL_BLOCK + sizeof(WORD) + sizeof(int)) {
+        //memcpy()
+
+    }*/
+
+}
+
 SmartPacket* Screen::GetChanged()
 {
     Capture();
-    Analyze();
+    std::vector<ScreenBlock>* res = nullptr;
+    Analyze(res);
 
-    int lol;
+    if (res == nullptr) {
+        return nullptr;
+    }
+
+    SmartPacket* sp = CompressChanges(res);
+    res->clear();
+    delete res;
+
+    return sp;
+/*    int lol;
     SmartPacket* sp = new SmartPacket();
     sp->AllocateSend( sizeof(lol) );
     char* buffer = sp->GetData();
     memcpy(buffer, &lol, sizeof(lol));
     sp->GetHeader()->type = 0x6879;
-    return sp;
+    return sp;*/
 }

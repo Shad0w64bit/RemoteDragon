@@ -84,10 +84,23 @@ void RemoteDragon2::SendScreen()
     free(mi->buffer);
     delete mi;
 */
+    static bool start = true;
+    SmartPacket* sp;
+    if (start) {
+        sp = screen.GetFull();
+        start = !start;
+    } else {
+        sp = screen.GetChanged();
+    }
 
 //    SmartPacket* sp = screen.GetChanged();
-    SmartPacket* sp = screen.GetFull();
-    NetClient2::Send(sp);
+//    SmartPacket* sp = screen.GetFull();
+    if (sp != nullptr) {
+        NetClient2::Send(sp);
+    } else {
+        screenSending = false;
+    }
+
     Sleep(100);
 }
 
